@@ -4,7 +4,6 @@ const axios = require('axios');
 const fs = require('fs');
 const { getXlsxStream } = require('xlstream');
 const multer = require('multer');
-const e = require('express');
 const url = "https://api.coindesk.com/v1/bpi/currentprice.json";
 
 app.get('/', function (req, res)
