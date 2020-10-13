@@ -87,10 +87,8 @@ var upload = multer({
   storage: storage
 });
 
-app.post('/excel-sum', upload.single('file'), (req, res) =>
+app.post('/excel-sum', upload.single('file'), async (req, res) =>
 {
-  (async () =>
-  {
     const stream = await getXlsxStream({
       filePath: req.file.path,
       sheet: 0,
@@ -98,7 +96,6 @@ app.post('/excel-sum', upload.single('file'), (req, res) =>
     let dataArr = [];
     stream.on('data', x => dataArr.push(x.raw.obj.A)),
       stream.on('end', () => res.send(`SUM is ${dataArr.reduce((a, b) => a + b)}`));
-  })();
 });
 
 app.listen(3000);
